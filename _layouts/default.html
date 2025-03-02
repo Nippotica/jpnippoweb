@@ -94,6 +94,20 @@
 {% include framework/google-analytics.html %}
 {% include framework/plausible-analytics.html %}
 {% include framework/umami-analytics.html %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var menu = document.querySelector(".menu-main-mobile");
+    var menuTrigger = document.querySelector(".hamburger-trigger");
 
+    if (menu && menuTrigger) {
+        menuTrigger.addEventListener("click", function() {
+            menu.classList.toggle("open");
+            document.body.classList.toggle("lock-scroll"); // Prevent scrolling when menu is open
+        });
+    }
+});
+</script>
+
+  
 </body>
 </html>
