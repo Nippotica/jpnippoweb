@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+  </script>
+  <script type="text/javascript" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <!-- Leaflet.js -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+</head>
+
+  <head>
+    <meta charset="utf-8">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <title>Formalizing Nvidia Ampere - Nippotica</title>
+
+
+  <meta name="description" content="A structured way to describe the a complex computing engine"/>
+
+
+
+    <meta property="og:type" content="website"/>
+<meta property="og:url" content="http://localhost:4000/blog/2024-02-27-formalnvidia/"/>
+
+
+  <meta property="og:title" content="Formalizing Nvidia Ampere"/>
+
+
+
+  <meta property="og:description" content="A structured way to describe the a complex computing engine"/>
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="@zerostaticio" />
+<meta name="twitter:creator" content="@zerostaticio" />
+    <link rel="alternate" type="application/atom+xml" title="Nippotica" href="/feed.xml">
+    <link rel="icon" href="/assets/images/favicon/favicon.png">
+
+
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+      <!-- https://github.com/orestbida/cookieconsent -->
+
+<link rel="stylesheet" href="/assets/css/cookieconsent.css">
+<script defer src="/assets/js/cookieconsent.js"></script>
+
+<!-- Inline script -->
+<script>
+    window.addEventListener('load', function () {
+
+        // obtain plugin
+        var cc = initCookieConsent();
+
+        // run plugin with your configuration
+        cc.run({
+            current_lang: 'en',
+            autoclear_cookies: true,                   // default: false
+            page_scripts: true,                        // default: false
+
+            // mode: 'opt-in'                          // default: 'opt-in'; value: 'opt-in' or 'opt-out'
+            // delay: 0,                               // default: 0
+            // auto_language: '',                      // default: null; could also be 'browser' or 'document'
+            // autorun: true,                          // default: true
+            // force_consent: false,                   // default: false
+            // hide_from_bots: true,                   // default: true
+            // remove_cookie_tables: false             // default: false
+            // cookie_name: 'cc_cookie',               // default: 'cc_cookie'
+            // cookie_expiration: 182,                 // default: 182 (days)
+            // cookie_necessary_only_expiration: 182   // default: disabled
+            // cookie_domain: location.hostname,       // default: current domain
+            // cookie_path: '/',                       // default: root
+            // cookie_same_site: 'Lax',                // default: 'Lax'
+            // use_rfc_cookie: false,                  // default: false
+            // revision: 0,                            // default: 0
+
+            onFirstAction: function (user_preferences, cookie) {
+                // callback triggered only once on the first accept/reject action
+            },
+
+            onAccept: function (cookie) {
+                // callback triggered on the first accept/reject action, and after each page load
+            },
+
+            onChange: function (cookie, changed_preferences) { 
+                // If analytics category is disabled => disable google analytics 
+                if (!cc.allowedCategory('analytics')) { 
+                    typeof gtag === 'function' && gtag('consent', 'update', { 
+                        'analytics_storage': 'denied' 
+                    }); 
+                } 
+            }, 
+
+            languages: {
+                'en': {
+                    consent_modal: {
+                        title: 'We use cookies!',
+                        description: 'Hi, this website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent. <button type="button" data-cc="c-settings" class="cc-link">Let me choose</button>',
+                        primary_btn: {
+                            text: 'Accept all',
+                            role: 'accept_all'              // 'accept_selected' or 'accept_all'
+                        },
+                        secondary_btn: {
+                            text: 'Reject all',
+                            role: 'accept_necessary'        // 'settings' or 'accept_necessary'
+                        }
+                    },
+                    settings_modal: {
+                        title: 'Cookie preferences',
+                        save_settings_btn: 'Save settings',
+                        accept_all_btn: 'Accept all',
+                        reject_all_btn: 'Reject all',
+                        close_btn_label: 'Close',
+                        // cookie_table_caption: 'Cookie list',
+                        cookie_table_headers: [
+                            { col1: 'Name' },
+                            { col2: 'Domain' },
+                            { col3: 'Expiration' },
+                            { col4: 'Description' }
+                        ],
+                        blocks: [
+                            {
+                                title: 'Cookie usage 📢',
+                                description: 'I use cookies to ensure the basic functionalities of the website and to enhance your online experience. You can choose for each category to opt-in/out whenever you want. For more details relative to cookies and other sensitive data, please read the full <a href="#" class="cc-link">privacy policy</a>.'
+                            }, {
+                                title: 'Strictly necessary cookies',
+                                description: 'These cookies are essential for the proper functioning of my website. Without these cookies, the website would not work properly',
+                                toggle: {
+                                    value: 'necessary',
+                                    enabled: true,
+                                    readonly: true          // cookie categories with readonly=true are all treated as "necessary cookies"
+                                }
+                            }, {
+                                title: 'Performance and Analytics cookies',
+                                description: 'These cookies allow the website to remember the choices you have made in the past',
+                                toggle: {
+                                    value: 'analytics',     // your cookie category
+                                    enabled: false,
+                                    readonly: false
+                                },
+                                cookie_table: [             // list of all expected cookies
+                                    {
+                                        col1: '^_ga',       // match all cookies starting with "_ga"
+                                        col2: 'google.com',
+                                        col3: '2 years',
+                                        col4: 'description ...',
+                                        is_regex: true
+                                    },
+                                    {
+                                        col1: '_gid',
+                                        col2: 'google.com',
+                                        col3: '1 day',
+                                        col4: 'description ...',
+                                    }
+                                ]
+                            },
+                            {
+                                title: 'More information',
+                                description: 'For any queries in relation to our policy on cookies and your choices, please <a class="cc-link" href="#yourcontactpage">contact us</a>.',
+                            }
+                        ]
+                    }
+                }
+            }
+        });
+    });
+</script>
+    
+
+    
+
+    <link href="/assets/css/fonts.css" rel="stylesheet">
+
+
+
+
+    
+
+     <!-- MathJax Configuration and Script -->
+    <script type="text/x-mathjax-config">
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true,
+          tags: 'ams', // Automatically number all displayed equations using the AMS style
+          tagSide: 'right', // Position of the equation numbers
+          tagIndent: '0.8em' // Indentation of the numbers
+        },
+        options: {
+          ignoreHtmlClass: "tex2jax_ignore",
+          processHtmlClass: "tex2jax_process"
+        }
+      };
+    </script>
+    <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+  </head>
+
+<body class="page page-post has-static-header">
+
+
+<div class="menu-main-mobile " id="menu-main-mobile">
+  
+  <div class="menu-main-mobile-top">
+    <div id="close-overlay" class="menu-main-close">
+      <div class="hamburger"></div>
+    </div>
+  </div>
+
+  <div class="menu-main-mobile-center">
+    
+      <ul class="menu">
+        
+          <li class="menu-item-会社概要">
+            <a href="/">会社概要</a>
+          </li>
+        
+          <li class="menu-item-テクノロジー">
+            <a href="/techjp/">テクノロジー</a>
+          </li>
+        
+          <li class="menu-item-ビジネスユニット">
+            <a href="/bizunitsjp/">ビジネスユニット</a>
+          </li>
+        
+          <li class="menu-item-インサイト">
+            <a href="/insights/">インサイト</a>
+          </li>
+        
+          <li class="menu-item-🇺🇸">
+            <a href="/welcome/">🇺🇸</a>
+          </li>
+        
+      </ul>
+    
+  </div>
+
+  <div class="menu-main-mobile-bottom">
+    
+      
+
+<div class="social" id="social">
+  
+  <a href="https://www.zerostatic.io" target="blank" title="Twitter">
+    <i class="fab fa-twitter"></i>
+  </a>
+  
+  <a href="https://www.zerostatic.io" target="blank" title="Github">
+    <i class="fab fa-github"></i>
+  </a>
+  
+  <a href="https://www.zerostatic.io" target="blank" title="Discord">
+    <i class="fab fa-discord"></i>
+  </a>
+  
+</div>
+
+
+    
+    
+  </div>
+
+</div>
+
+
+
+
+<div id="header" class='header '>
+  <div class="container">
+    <div class="logos">
+  <div class="logo logo-desktop">
+    
+      <div class="logo-image">
+        <a href="/">
+          <img height="27px" width="146px" alt="Nippotica Logo" src="/assets/images/logo/logo.png"/>
+        </a>
+      </div>
+    
+  
+    
+    
+  </div>
+
+  <div class="logo logo-desktop-invert">
+    
+    
+      <div class="logo-image">
+        <a href="/">
+          <img height="27px" width="146px" alt="Nippotica Logo" src="/assets/images/logo/logo-invert.png"/>
+        </a>
+      </div>
+    
+  
+    
+    
+  </div>
+
+  <div class="logo logo-mobile">
+    
+    
+      <div class="logo-image">
+        <a href="/">
+          <img height="27px" width="146px" alt="Nippotica Logo" src="/assets/images/logo/logo-mobile.png"/>
+        </a>
+      </div>
+    
+  
+    
+    
+  </div>
+
+
+  <div class="logo logo-mobile-invert">
+    
+    
+      <div class="logo-image">
+        <a href="/">
+          <img height="27px" width="146px" alt="Nippotica Logo" src="/assets/images/logo/logo-invert-mobile.png"/>
+        </a>
+      </div>
+    
+  
+    
+
+  </div>
+
+</div>
+
+
+    <div class="menu-main">
+  <ul>
+    
+      
+
+        
+        
+
+        <li class="menu-item-dropdown menu-item-会社概要 ">
+          <a href="/">会社概要 <i class="fa-solid fa-chevron-down"></i></a>
+          
+          <div class="dropdown-menu">
+            
+<a href="/aboutjp/"
+   class="dropdown-item "
+   
+   >
+   について
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/peoplejp/"
+   class="dropdown-item "
+   
+   >
+   メンバー
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+          </div>
+
+        </li>
+      
+    
+      
+        
+        <li class=" ">
+<a href="/techjp/"  >テクノロジー</a>
+        </li>
+      
+    
+      
+
+        
+        
+
+        <li class="menu-item-dropdown menu-item-ビジネスユニット ">
+          <a href="/bizunitsjp/">ビジネスユニット <i class="fa-solid fa-chevron-down"></i></a>
+          
+          <div class="dropdown-menu">
+            
+<a href="https://www.nippofin.com/"
+   class="dropdown-item "
+   target="_blank"
+   rel="noopener noreferrer">
+   Nippofin
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="https://www.algotechniq.com/"
+   class="dropdown-item "
+   target="_blank"
+   rel="noopener noreferrer">
+   Algotechniq
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+          </div>
+
+        </li>
+      
+    
+      
+
+        
+        
+
+        <li class="menu-item-dropdown menu-item-インサイト ">
+          <a href="/insights/">インサイト <i class="fa-solid fa-chevron-down"></i></a>
+          
+          <div class="dropdown-menu">
+            
+<a href="https://www.nippofin.com/blog/"
+   class="dropdown-item "
+   target="_blank"
+   rel="noopener noreferrer">
+   Fintech
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="https://www.algotechniq.com/blog/"
+   class="dropdown-item "
+   target="_blank"
+   rel="noopener noreferrer">
+   IIoT
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+          </div>
+
+        </li>
+      
+    
+      
+
+        
+        
+
+        <li class="menu-item-dropdown menu-item-🇺🇸 ">
+          <a href="/welcome/">🇺🇸 <i class="fa-solid fa-chevron-down"></i></a>
+          
+          <div class="dropdown-menu">
+            
+<a href="/about/"
+   class="dropdown-item "
+   
+   >
+   About
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/people/"
+   class="dropdown-item "
+   
+   >
+   Team
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/tech/"
+   class="dropdown-item "
+   
+   >
+   Tech
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/contact/"
+   class="dropdown-item "
+   
+   >
+   Contact
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/privacy-policy/"
+   class="dropdown-item "
+   
+   >
+   Privacy
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+          </div>
+
+        </li>
+      
+    
+  </ul>
+</div>
+
+    
+    <div class="hamburger-trigger" id="toggle-menu-main-mobile">
+  <button class="hamburger">Menu</button>
+</div>
+  </div>
+</div>
+
+<div id="wrapper" class="wrapper">     
+  <div class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        
+
+
+
+
+
+
+
+
+
+<div class="heading heading-left">
+  
+  
+  
+  <div class="heading-heading">
+    <h1>Formalizing Nvidia Ampere</h1>
+  </div>
+  
+  
+  
+    <div class="heading-description">
+      <p>A structured way to describe the a complex computing engine</p>
+    </div>
+  
+
+  
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section pt-0">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8">
+        
+        
+        
+        <div class="content"><blockquote>
+  <p>BNF serves as a robust framework for developers to comprehend the intricate design of Nvidia’s Ampere microarchitecture efficiently.</p>
+</blockquote>
+
+<p>The Backus-Naur Form (BNF) is a valuable tool for understanding computer architectures because it concisely defines complex systems using hierarchical structures and clear, formal syntax.</p>
+
+<p>By breaking down the architecture into fundamental components such as processing units, memory, interconnects, software support, and specialized features, BNF facilitates a structured and modular representation. This enables a clear visualization of the relationships and dependencies between different elements of the microarchitecture.</p>
+
+<p>For instance, using BNF to specify the number of CUDA cores, Tensor Cores, and the clock speeds provides a clear snapshot of the processing capabilities. Similarly, detailing memory types, capacities, and bandwidths helps in understanding the data handling and storage aspects.</p>
+
+<p>The formalism of BNF also makes it easier to identify key characteristics and compare different architectural generations.</p>
+
+<h3 id="bnf-use-case-nvidias-ampere">BNF Use Case: Nvidia’s Ampere</h3>
+<p>Here’s a BNF specification for Nvidia’s Ampere architecture,</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">Ampere_Architecture</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="o">&lt;</span><span class="nx">Architecture_Name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">Processor</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">Memory</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">Interconnect</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">Software_Support</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">Features</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">Architecture_Name</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">Ampere</span><span class="dl">"</span>
+
+<span class="o">&lt;</span><span class="nx">Processor</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="o">&lt;</span><span class="nx">SM_Count</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">Core_Count</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">Clock_Speeds</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">Tensor_Cores</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">RT_Cores</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">SM_Count</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">SM Count</span><span class="dl">"</span> <span class="dl">"</span><span class="s2">108</span><span class="dl">"</span>
+<span class="o">&lt;</span><span class="nx">Core_Count</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">CUDA Cores</span><span class="dl">"</span> <span class="dl">"</span><span class="s2">6912</span><span class="dl">"</span>
+<span class="o">&lt;</span><span class="nx">Clock_Speeds</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="o">&lt;</span><span class="nx">Base_Clock</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">Boost_Clock</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">Base_Clock</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">Base Clock</span><span class="dl">"</span> <span class="dl">"</span><span class="s2">1410 MHz</span><span class="dl">"</span>
+<span class="o">&lt;</span><span class="nx">Boost_Clock</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">Boost Clock</span><span class="dl">"</span> <span class="dl">"</span><span class="s2">1730 MHz</span><span class="dl">"</span>
+<span class="o">&lt;</span><span class="nx">Tensor_Cores</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">Tensor Cores</span><span class="dl">"</span> <span class="dl">"</span><span class="s2">432</span><span class="dl">"</span>
+<span class="o">&lt;</span><span class="nx">RT_Cores</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">Ray Tracing Cores</span><span class="dl">"</span> <span class="dl">"</span><span class="s2">84</span><span class="dl">"</span>
+
+<span class="o">&lt;</span><span class="nx">Memory</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="o">&lt;</span><span class="nx">Memory_Type</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">Memory_Capacity</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">Memory_Bandwidth</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">Memory_Type</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">HBM2</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">HBM2e</span><span class="dl">"</span>
+<span class="o">&lt;</span><span class="nx">Memory_Capacity</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">40 GB</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">80 GB</span><span class="dl">"</span>
+<span class="o">&lt;</span><span class="nx">Memory_Bandwidth</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">1555 GB/s</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">2039 GB/s</span><span class="dl">"</span>
+
+<span class="o">&lt;</span><span class="nx">Interconnect</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="o">&lt;</span><span class="nx">NVLink</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="nx">PCIe</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">NVLink</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">NVLink</span><span class="dl">"</span> <span class="dl">"</span><span class="s2">600 GB/s</span><span class="dl">"</span>
+<span class="o">&lt;</span><span class="nx">PCIe</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">PCIe</span><span class="dl">"</span> <span class="o">&lt;</span><span class="nx">Version</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">Lane_Count</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">Version</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">Gen4</span><span class="dl">"</span>
+<span class="o">&lt;</span><span class="nx">Lane_Count</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">16</span><span class="dl">"</span>
+
+<span class="o">&lt;</span><span class="nx">Software_Support</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="o">&lt;</span><span class="nx">CUDA</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">TensorRT</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">NCCL</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">CUDA</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">CUDA</span><span class="dl">"</span> <span class="dl">"</span><span class="s2">11.0</span><span class="dl">"</span>
+<span class="o">&lt;</span><span class="nx">TensorRT</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">TensorRT</span><span class="dl">"</span> <span class="dl">"</span><span class="s2">7.2</span><span class="dl">"</span>
+<span class="o">&lt;</span><span class="nx">NCCL</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">NCCL</span><span class="dl">"</span> <span class="dl">"</span><span class="s2">2.7</span><span class="dl">"</span>
+
+<span class="o">&lt;</span><span class="nx">Features</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="o">&lt;</span><span class="nx">Special_Features</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">Special_Features</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="o">&lt;</span><span class="nx">Feature</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="nx">Feature</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nx">Special_Features</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">Feature</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">Multi-Instance GPU</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">NVSwitch</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">DLSS</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">Third-Gen Tensor Cores</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">Second-Gen Ray Tracing Cores</span><span class="dl">"</span>
+
+<span class="o">&lt;</span><span class="nb">Number</span><span class="o">&gt;</span> <span class="p">::</span><span class="o">=</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">1</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">2</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">3</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">4</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">5</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">6</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">7</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">8</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">9</span><span class="dl">"</span> <span class="o">|</span> <span class="o">&lt;</span><span class="nb">Number</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nb">Number</span><span class="o">&gt;</span>
+
+</code></pre></div></div>
+
+<h3 id="explanation">Explanation:</h3>
+
+<ul>
+  <li><strong>Architecture_Name</strong>: Specifies the architecture name, which is “Ampere”.</li>
+  <li><strong>Processor</strong>: Describes the processing units with numerical values for Streaming Multiprocessor (SM) count, CUDA core count, base and boost clock speeds, Tensor Cores, and Ray Tracing Cores.</li>
+  <li><strong>Memory</strong>: Defines the memory type, capacity, and bandwidth with numerical values.</li>
+  <li><strong>Interconnect</strong>: Details the interconnection standards with specific values for NVLink speed and PCIe version and lanes.</li>
+  <li><strong>Software_Support</strong>: Lists the software frameworks and their specific versions compatible with the Ampere architecture.</li>
+  <li><strong>Features</strong>: Includes specialized features such as Multi-Instance GPU (MIG) technology, NVSwitch, DLSS, and generations of Tensor and Ray Tracing Cores.</li>
+  <li><strong>Number</strong>: Terminals for representing numerical values.</li>
+</ul>
+
+<h3 id="whats-a-cuda-core">What’s a CUDA Core?</h3>
+
+<p>A CUDA (Compute Unified Device Architecture) core is a processing unit within the GPU that executes parallel computations. Each CUDA core is designed to handle a single floating-point or integer operation per clock cycle. The core architecture is optimized for massively parallel computations, making it ideal for tasks such as scientific simulations, deep learning, image processing, and other compute-intensive applications.</p>
+
+<p>If we consider matrix multiplication as a practical example, each CUDA core can handle an element of the matrix multiplication independently. Given matrices \( A \) and \( B \), the product \( C = A \times B \) can be computed where each element \( c_{ij} \) is the dot product of the \( i \)-th row of \( A \) and the \( j \)-th column of \( B \). With CUDA cores, these computations for each \( c_{ij} \) can be performed in parallel, drastically reducing computation time.</p>
+
+<p><strong>HBM2 (High Bandwidth Memory 2)</strong> is a type of computer memory designed for high-performance GPUs and other computing devices. It stacks memory chips vertically and connects them with a fast interface, allowing for much higher data transfer speeds and more memory in a smaller space compared to traditional memory types like GDDR6. This design helps GPUs handle large amounts of data quickly, improving performance for tasks like AI, and scientific computations.</p>
+
+<p><strong>HBM2e (High Bandwidth Memory 2 Enhanced)</strong> is an improved version of HBM2. It offers even higher data transfer speeds and larger capacity, allowing for even better performance in demanding applications. HBM2e maintains the same stacked design and fast interface but pushes the boundaries further, enabling GPUs to process more data faster, which is crucial for advanced computing tasks like deep learning and complex simulations.</p>
+
+<p><strong>NVLink</strong> is a high-speed connection technology developed by Nvidia that allows GPUs to communicate with each other and with CPUs much faster than traditional methods like PCIe. By creating a direct, high-bandwidth link between multiple GPUs or between a GPU and a CPU, NVLink enables faster data transfer and more efficient parallel processing. This boosts the performance of applications that need to handle large amounts of data quickly, such as AI training, scientific computing, and complex simulations.</p>
+</div>
+
+        
+        <div class="categories">
+        
+
+
+  
+    
+
+
+
+
+<div class="category-link">
+<a href="/category/infonote">
+  Infonote
+</a>
+
+</div>
+  
+    
+
+
+
+
+<div class="category-link">
+<a href="/category/technote">
+  Technote
+</a>
+
+</div>
+  
+
+        
+        </div>
+
+        
+
+    
+
+    
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <div class="section section-base-bg-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-12"></div>
+        <div class="subscribe">
+  <div class="row">
+    <div class="col-12 col-md-4 mb-2 mb-md-0">
+      <h2 class="">Let's keep in touch</h2>
+    </div>
+
+    <div class="co-12 col-md-8">
+      <div id="mc_embed_signup">
+        <form action="https://zerostatic.us21.list-manage.com/subscribe/post?u=798e19886b83aaab346734382&amp;id=f1c526a772&amp;f_id=0027e3e6f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="subscribe-form" target="_blank" novalidate>
+          <div class="subscribe-fields">
+            <input class="required email" id="mce-EMAIL" name="EMAIL" placeholder="Your email address" type="email" value="" />
+            <div aria-hidden="true" style="position: absolute; left: -5000px"><input name="b_675276692aebec1c007f8156d_3e3da720c2" tabindex="-1" type="text" value="" /></div>
+            <input type="submit" value="Submit" />
+          </div>
+          <div class="subscribe-responses" id="mce-responses">
+            <div class="response response-error" id="mce-error-response" style="display: none"></div>
+            <div class="response response-success" id="mce-success-response" style="display: none"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+  <div class="footer">
+  <div class="container">
+    <div class="row">
+
+        <div class="col-12 col-md-4">
+          <div class="footer-info">
+            
+              <h2>Nippotica Corporation</h2>
+            
+
+            
+              <p>Developing Deeptech Solutions</p>
+            
+          </div>
+
+          
+          
+        </div>
+
+        <div class="col-12 col-md-8 mt-gutter mt-md-0">
+          <div class="row justify-content-end">
+
+            
+
+            
+              <div class="col-12 col-md-3 mt-gutter mt-md-0">
+                <div class="footer-menu">
+                
+                  <h3>Notices</h3>
+                
+                
+<div class="menu-footer">
+  <ul>
+    
+      <li class="">
+        <a href="/privacyjp/">プライバシー</a>
+      </li>
+    
+      <li class="">
+        <a href="/contactjp/">お問い合わせ</a>
+      </li>
+    
+  </ul>
+</div>
+
+                </div>
+              </div>
+            
+
+            
+        
+          </div>
+        </div>
+      
+    </div>
+    
+
+  </div>
+</div>
+
+
+
+<script type="text/javascript" src="/assets/js/scripts.js"></script>
+
+<script type="text/javascript" src="/assets/js/hamburger.js"></script>
+<script type="text/javascript" src="/assets/js/darkModeSwitch.js"></script>
+
+<script type="text/javascript" src="/assets/js/scripts.js"></script>
+
+<script type="text/javascript" src="/assets/js/hamburger.js"></script>
+<script type="text/javascript" src="/assets/js/darkModeSwitch.js"></script>
+
+<!-- Load Map Script -->
+<script src="/assets/js/map.js"></script>
+
+
+
+
+</body>
+</html>

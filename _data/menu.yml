@@ -1,0 +1,78 @@
+main:
+  - name: 会社概要 
+    url: "#"
+    weight: 2
+    child:
+      - name: "について"
+        url: /aboutjp/
+      - name: "メンバー"
+        url: /peoplejp/
+  - name: テクノロジー
+    url: /techjp/
+    weight: 2
+  - name: ビジネスユニット
+    url: /bizunitsjp/
+    weight: 3
+    child:
+      - name: "Nippofin"
+        url: https://www.nippofin.com/
+        target: _blank
+        rel: noopener noreferrer
+      - name: "Algotechniq"
+        url: https://www.algotechniq.com/
+        target: _blank
+        rel: noopener noreferrer
+  - name: インサイト
+    url: /insights/
+    weight: 4
+    child:
+      - name: "Fintech"
+        url: https://www.nippofin.com/blog/
+        target: _blank
+        rel: noopener noreferrer
+      - name: "IIoT"
+        url: https://www.algotechniq.com/blog/
+        target: _blank
+        rel: noopener noreferrer
+  - name: 🇺🇸
+    url: /welcome/
+    weight: 4
+    child:
+      - name: "About"
+        url: /about/
+      - name: "Team"
+        url: /people/
+      - name: "Tech"
+        url: /tech/
+      - name: "Contact"
+        url: /contact/
+      - name: "Privacy"
+        url: /privacy-policy/
+
+footer_primary:
+  - name: "Financial Engineering"
+    url: /projects/project-2/
+  - name: "Computing on Clouds"
+    url: /projects/project-1/
+  - name: "System Development"
+    url: /projects/project-3/
+  - name: "Data Quality Management"
+    url: /projects/project-4/
+
+footer_secondary:
+  - name: プライバシー
+    url: /privacyjp/
+    weight: 1
+  - name: お問い合わせ
+    url: /contactjp/
+    weight: 4
+
+footer_tertiary:
+  - name: Privacy Policy
+    url: /privacyjp/
+    weight: 1
+
+bottom:
+  - name: Privacy Policy
+    url: /privacyjp/
+    weight: 1

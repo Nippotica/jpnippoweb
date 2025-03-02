@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+  </script>
+  <script type="text/javascript" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <!-- Leaflet.js -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+</head>
+
+  <head>
+    <meta charset="utf-8">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <title>Meet Kou - Nippotica</title>
+
+
+  <meta name="description" content="What does a jumpy asset price look like?"/>
+
+
+
+    <meta property="og:type" content="website"/>
+<meta property="og:url" content="http://localhost:4000/blog/2021-06-26-heavytailedkou/"/>
+
+
+  <meta property="og:title" content="Meet Kou"/>
+
+
+
+  <meta property="og:description" content="What does a jumpy asset price look like?"/>
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="@zerostaticio" />
+<meta name="twitter:creator" content="@zerostaticio" />
+    <link rel="alternate" type="application/atom+xml" title="Nippotica" href="/feed.xml">
+    <link rel="icon" href="/assets/images/favicon/favicon.png">
+
+
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+      <!-- https://github.com/orestbida/cookieconsent -->
+
+<link rel="stylesheet" href="/assets/css/cookieconsent.css">
+<script defer src="/assets/js/cookieconsent.js"></script>
+
+<!-- Inline script -->
+<script>
+    window.addEventListener('load', function () {
+
+        // obtain plugin
+        var cc = initCookieConsent();
+
+        // run plugin with your configuration
+        cc.run({
+            current_lang: 'en',
+            autoclear_cookies: true,                   // default: false
+            page_scripts: true,                        // default: false
+
+            // mode: 'opt-in'                          // default: 'opt-in'; value: 'opt-in' or 'opt-out'
+            // delay: 0,                               // default: 0
+            // auto_language: '',                      // default: null; could also be 'browser' or 'document'
+            // autorun: true,                          // default: true
+            // force_consent: false,                   // default: false
+            // hide_from_bots: true,                   // default: true
+            // remove_cookie_tables: false             // default: false
+            // cookie_name: 'cc_cookie',               // default: 'cc_cookie'
+            // cookie_expiration: 182,                 // default: 182 (days)
+            // cookie_necessary_only_expiration: 182   // default: disabled
+            // cookie_domain: location.hostname,       // default: current domain
+            // cookie_path: '/',                       // default: root
+            // cookie_same_site: 'Lax',                // default: 'Lax'
+            // use_rfc_cookie: false,                  // default: false
+            // revision: 0,                            // default: 0
+
+            onFirstAction: function (user_preferences, cookie) {
+                // callback triggered only once on the first accept/reject action
+            },
+
+            onAccept: function (cookie) {
+                // callback triggered on the first accept/reject action, and after each page load
+            },
+
+            onChange: function (cookie, changed_preferences) { 
+                // If analytics category is disabled => disable google analytics 
+                if (!cc.allowedCategory('analytics')) { 
+                    typeof gtag === 'function' && gtag('consent', 'update', { 
+                        'analytics_storage': 'denied' 
+                    }); 
+                } 
+            }, 
+
+            languages: {
+                'en': {
+                    consent_modal: {
+                        title: 'We use cookies!',
+                        description: 'Hi, this website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent. <button type="button" data-cc="c-settings" class="cc-link">Let me choose</button>',
+                        primary_btn: {
+                            text: 'Accept all',
+                            role: 'accept_all'              // 'accept_selected' or 'accept_all'
+                        },
+                        secondary_btn: {
+                            text: 'Reject all',
+                            role: 'accept_necessary'        // 'settings' or 'accept_necessary'
+                        }
+                    },
+                    settings_modal: {
+                        title: 'Cookie preferences',
+                        save_settings_btn: 'Save settings',
+                        accept_all_btn: 'Accept all',
+                        reject_all_btn: 'Reject all',
+                        close_btn_label: 'Close',
+                        // cookie_table_caption: 'Cookie list',
+                        cookie_table_headers: [
+                            { col1: 'Name' },
+                            { col2: 'Domain' },
+                            { col3: 'Expiration' },
+                            { col4: 'Description' }
+                        ],
+                        blocks: [
+                            {
+                                title: 'Cookie usage 📢',
+                                description: 'I use cookies to ensure the basic functionalities of the website and to enhance your online experience. You can choose for each category to opt-in/out whenever you want. For more details relative to cookies and other sensitive data, please read the full <a href="#" class="cc-link">privacy policy</a>.'
+                            }, {
+                                title: 'Strictly necessary cookies',
+                                description: 'These cookies are essential for the proper functioning of my website. Without these cookies, the website would not work properly',
+                                toggle: {
+                                    value: 'necessary',
+                                    enabled: true,
+                                    readonly: true          // cookie categories with readonly=true are all treated as "necessary cookies"
+                                }
+                            }, {
+                                title: 'Performance and Analytics cookies',
+                                description: 'These cookies allow the website to remember the choices you have made in the past',
+                                toggle: {
+                                    value: 'analytics',     // your cookie category
+                                    enabled: false,
+                                    readonly: false
+                                },
+                                cookie_table: [             // list of all expected cookies
+                                    {
+                                        col1: '^_ga',       // match all cookies starting with "_ga"
+                                        col2: 'google.com',
+                                        col3: '2 years',
+                                        col4: 'description ...',
+                                        is_regex: true
+                                    },
+                                    {
+                                        col1: '_gid',
+                                        col2: 'google.com',
+                                        col3: '1 day',
+                                        col4: 'description ...',
+                                    }
+                                ]
+                            },
+                            {
+                                title: 'More information',
+                                description: 'For any queries in relation to our policy on cookies and your choices, please <a class="cc-link" href="#yourcontactpage">contact us</a>.',
+                            }
+                        ]
+                    }
+                }
+            }
+        });
+    });
+</script>
+    
+
+    
+
+    <link href="/assets/css/fonts.css" rel="stylesheet">
+
+
+
+
+    
+
+     <!-- MathJax Configuration and Script -->
+    <script type="text/x-mathjax-config">
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true,
+          tags: 'ams', // Automatically number all displayed equations using the AMS style
+          tagSide: 'right', // Position of the equation numbers
+          tagIndent: '0.8em' // Indentation of the numbers
+        },
+        options: {
+          ignoreHtmlClass: "tex2jax_ignore",
+          processHtmlClass: "tex2jax_process"
+        }
+      };
+    </script>
+    <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+  </head>
+
+<body class="page page-post has-static-header">
+
+
+<div class="menu-main-mobile " id="menu-main-mobile">
+  
+  <div class="menu-main-mobile-top">
+    <div id="close-overlay" class="menu-main-close">
+      <div class="hamburger"></div>
+    </div>
+  </div>
+
+  <div class="menu-main-mobile-center">
+    
+      <ul class="menu">
+        
+          <li class="menu-item-会社概要">
+            <a href="/">会社概要</a>
+          </li>
+        
+          <li class="menu-item-テクノロジー">
+            <a href="/techjp/">テクノロジー</a>
+          </li>
+        
+          <li class="menu-item-ビジネスユニット">
+            <a href="/bizunitsjp/">ビジネスユニット</a>
+          </li>
+        
+          <li class="menu-item-インサイト">
+            <a href="/insights/">インサイト</a>
+          </li>
+        
+          <li class="menu-item-🇺🇸">
+            <a href="/welcome/">🇺🇸</a>
+          </li>
+        
+      </ul>
+    
+  </div>
+
+  <div class="menu-main-mobile-bottom">
+    
+      
+
+<div class="social" id="social">
+  
+  <a href="https://www.zerostatic.io" target="blank" title="Twitter">
+    <i class="fab fa-twitter"></i>
+  </a>
+  
+  <a href="https://www.zerostatic.io" target="blank" title="Github">
+    <i class="fab fa-github"></i>
+  </a>
+  
+  <a href="https://www.zerostatic.io" target="blank" title="Discord">
+    <i class="fab fa-discord"></i>
+  </a>
+  
+</div>
+
+
+    
+    
+  </div>
+
+</div>
+
+
+
+
+<div id="header" class='header '>
+  <div class="container">
+    <div class="logos">
+  <div class="logo logo-desktop">
+    
+      <div class="logo-image">
+        <a href="/">
+          <img height="27px" width="146px" alt="Nippotica Logo" src="/assets/images/logo/logo.png"/>
+        </a>
+      </div>
+    
+  
+    
+    
+  </div>
+
+  <div class="logo logo-desktop-invert">
+    
+    
+      <div class="logo-image">
+        <a href="/">
+          <img height="27px" width="146px" alt="Nippotica Logo" src="/assets/images/logo/logo-invert.png"/>
+        </a>
+      </div>
+    
+  
+    
+    
+  </div>
+
+  <div class="logo logo-mobile">
+    
+    
+      <div class="logo-image">
+        <a href="/">
+          <img height="27px" width="146px" alt="Nippotica Logo" src="/assets/images/logo/logo-mobile.png"/>
+        </a>
+      </div>
+    
+  
+    
+    
+  </div>
+
+
+  <div class="logo logo-mobile-invert">
+    
+    
+      <div class="logo-image">
+        <a href="/">
+          <img height="27px" width="146px" alt="Nippotica Logo" src="/assets/images/logo/logo-invert-mobile.png"/>
+        </a>
+      </div>
+    
+  
+    
+
+  </div>
+
+</div>
+
+
+    <div class="menu-main">
+  <ul>
+    
+      
+
+        
+        
+
+        <li class="menu-item-dropdown menu-item-会社概要 ">
+          <a href="/">会社概要 <i class="fa-solid fa-chevron-down"></i></a>
+          
+          <div class="dropdown-menu">
+            
+<a href="/aboutjp/"
+   class="dropdown-item "
+   
+   >
+   について
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/peoplejp/"
+   class="dropdown-item "
+   
+   >
+   メンバー
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+          </div>
+
+        </li>
+      
+    
+      
+        
+        <li class=" ">
+<a href="/techjp/"  >テクノロジー</a>
+        </li>
+      
+    
+      
+
+        
+        
+
+        <li class="menu-item-dropdown menu-item-ビジネスユニット ">
+          <a href="/bizunitsjp/">ビジネスユニット <i class="fa-solid fa-chevron-down"></i></a>
+          
+          <div class="dropdown-menu">
+            
+<a href="https://www.nippofin.com/"
+   class="dropdown-item "
+   target="_blank"
+   rel="noopener noreferrer">
+   Nippofin
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="https://www.algotechniq.com/"
+   class="dropdown-item "
+   target="_blank"
+   rel="noopener noreferrer">
+   Algotechniq
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+          </div>
+
+        </li>
+      
+    
+      
+
+        
+        
+
+        <li class="menu-item-dropdown menu-item-インサイト ">
+          <a href="/insights/">インサイト <i class="fa-solid fa-chevron-down"></i></a>
+          
+          <div class="dropdown-menu">
+            
+<a href="https://www.nippofin.com/blog/"
+   class="dropdown-item "
+   target="_blank"
+   rel="noopener noreferrer">
+   Fintech
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="https://www.algotechniq.com/blog/"
+   class="dropdown-item "
+   target="_blank"
+   rel="noopener noreferrer">
+   IIoT
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+          </div>
+
+        </li>
+      
+    
+      
+
+        
+        
+
+        <li class="menu-item-dropdown menu-item-🇺🇸 ">
+          <a href="/welcome/">🇺🇸 <i class="fa-solid fa-chevron-down"></i></a>
+          
+          <div class="dropdown-menu">
+            
+<a href="/about/"
+   class="dropdown-item "
+   
+   >
+   About
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/people/"
+   class="dropdown-item "
+   
+   >
+   Team
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/tech/"
+   class="dropdown-item "
+   
+   >
+   Tech
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/contact/"
+   class="dropdown-item "
+   
+   >
+   Contact
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/privacy-policy/"
+   class="dropdown-item "
+   
+   >
+   Privacy
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+          </div>
+
+        </li>
+      
+    
+  </ul>
+</div>
+
+    
+    <div class="hamburger-trigger" id="toggle-menu-main-mobile">
+  <button class="hamburger">Menu</button>
+</div>
+  </div>
+</div>
+
+<div id="wrapper" class="wrapper">     
+  <div class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        
+
+
+
+
+
+
+
+
+
+<div class="heading heading-left">
+  
+  
+  
+  <div class="heading-heading">
+    <h1>Meet Kou</h1>
+  </div>
+  
+  
+  
+    <div class="heading-description">
+      <p>What does a jumpy asset price look like?</p>
+    </div>
+  
+
+  
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section pt-0">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8">
+        
+        
+          <div class="mb-2">
+          
+            
+
+
+
+
+<div class="author">
+  
+
+  
+</div>
+          
+          </div>
+        
+        
+        <div class="content"><p>Imagine the stock price is following its usual fluctuations due to market factors (modeled by the drift and diffusion terms), but at random times, there are sudden and significant changes in price due to specific events (like earnings announcements, macroeconomic news, etc.). These events cause the stock price to “jump” discontinuously rather than change gradually.</p>
+
+<figure>
+  <a href="" target="">
+    <img src="/assets/images/gen/content/koumodelfull.png" alt="" />
+  </a>
+  <figcaption>
+    <h4></h4>
+    <p>The Kou diffusion model is a great way to simulate realistic-looking asset prices</p>
+  </figcaption>
+</figure>
+
+<h3 id="kou-jump-diffusion-model">Kou Jump-Diffusion Model</h3>
+<p>The Kou jump-diffusion model, a popular model in financial mathematics for capturing asset price dynamics with jumps. The Kou model extends the classic Black-Scholes model by incorporating double exponential jump processes to better capture the leptokurtic (i.e., heavy-tailed) and skewed nature of asset returns observed in real markets.</p>
+
+<p>In the Kou model, the dynamics of the stock price \( S_t \) are given by the following stochastic differential equation (SDE):</p>
+
+<p>\[
+\frac{\mathrm{d} S_t}{S_t} = \mu \, \mathrm{d} t + \sigma \, \mathrm{d} W_t + \mathrm{d} \left( \sum_{i=1}^{N(t)} (J_i - 1) \right)
+\]</p>
+
+<p>where:</p>
+<ul>
+  <li>\( \frac{\mathrm{d} S_t}{S_t} \): The relative change in the stock price.</li>
+  <li>\( \mu \): The drift term representing the expected rate of return.</li>
+  <li>\( \sigma \): The volatility of the stock price.</li>
+  <li>\( W_t \): A standard Wiener process (Brownian motion).</li>
+  <li>\( N(t) \): A Poisson process with intensity \( \lambda \), representing the number of jumps up to time \( t \).</li>
+  <li>\( J_i \): The random variable representing the relative jump size, modeled by a double exponential distribution.</li>
+</ul>
+
+<h3 id="double-exponential-distribution">Double Exponential Distribution:</h3>
+
+<p>The double exponential distribution used in the Kou model assumes that the log-jump sizes are distributed according to a mixture of two exponential distributions, one for positive jumps and one for negative jumps. This can be mathematically represented as:</p>
+
+\[J_i = \begin{cases} 
+Y_+ &amp; \text{with probability } p \\
+Y_- &amp; \text{with probability } 1-p 
+\end{cases}\]
+
+<p>where:</p>
+<ul>
+  <li>\( Y_+ \sim \text{Exp}(\eta_1) \): The positive jump size follows an exponential distribution with parameter \( \eta_1 \).</li>
+  <li>\( Y_- \sim \text{Exp}(\eta_2) \): The negative jump size follows an exponential distribution with parameter \( \eta_2 \).</li>
+  <li>\( p \): The probability of a positive jump.</li>
+</ul>
+
+<h3 id="complete-sde-form">Complete SDE Form:</h3>
+
+<p>The complete SDE form of the Kou model incorporating these elements is:</p>
+
+<p>\[
+\frac{\mathrm{d} S_t}{S_t} = \mu \, \mathrm{d} t + \sigma \, \mathrm{d} W_t + \mathrm{d} \left( \sum_{i=1}^{N(t)} (J_i - 1) \right)
+\]</p>
+
+<h3 id="interpretation">Interpretation:</h3>
+
+<ul>
+  <li><strong>\( \mu \, \mathrm{d} t \)</strong>: Continuous drift term.</li>
+  <li><strong>\( \sigma \, \mathrm{d} W_t \)</strong>: Continuous diffusion term representing the random fluctuation of the asset price.</li>
+  <li><strong>\( \mathrm{d} \left( \sum_{i=1}^{N(t)} (J_i - 1) \right) \)</strong>: Jump term representing the discontinuous jumps in the asset price.</li>
+</ul>
+
+<h3 id="practical-applications">Practical Applications:</h3>
+
+<p>The Kou model is particularly useful for pricing derivatives and managing risk in markets where asset prices exhibit significant jumps. It provides a more accurate reflection of market behavior compared to models that assume continuous price changes only.</p>
+
+<h3 id="numerical-example-in-python">Numerical Example in Python</h3>
+
+<p>Consider a stock with the following parameters:</p>
+<ul>
+  <li>Drift (\( \mu \)) = 0.05 (5% per year)</li>
+  <li>Volatility (\( \sigma \)) = 0.2 (20% per year)</li>
+  <li>Poisson intensity (\( \lambda \)) = 0.1 (10% chance of jump per year)</li>
+  <li>Positive jump parameter (\( \eta_1 \)) = 0.1</li>
+  <li>Negative jump parameter (\( \eta_2 \)) = 0.1</li>
+  <li>Probability of positive jump (\( p \)) = 0.5</li>
+</ul>
+
+<p>These parameters can be used to simulate the stock price dynamics, including the impact of jumps, providing more realistic modeling of asset prices.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="c1"># Parameters
+</span><span class="n">mu</span> <span class="o">=</span> <span class="mf">0.05</span>        <span class="c1"># drift term
+</span><span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.2</span>      <span class="c1"># volatility
+</span><span class="n">lambda_</span> <span class="o">=</span> <span class="mf">0.1</span>    <span class="c1"># jump intensity (rate of Poisson process)
+</span><span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span>          <span class="c1"># probability of positive jump
+</span><span class="n">eta1</span> <span class="o">=</span> <span class="mf">0.1</span>       <span class="c1"># parameter for positive jump size
+</span><span class="n">eta2</span> <span class="o">=</span> <span class="mf">0.1</span>       <span class="c1"># parameter for negative jump size
+</span><span class="n">T</span> <span class="o">=</span> <span class="mi">1</span>            <span class="c1"># time horizon (1 year)
+</span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>         <span class="c1"># number of time steps
+</span>
+<span class="c1"># Time increments
+</span><span class="n">dt</span> <span class="o">=</span> <span class="n">T</span> <span class="o">/</span> <span class="n">n</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Initialize stock price process
+</span><span class="n">S0</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">S0</span>
+
+<span class="c1"># Simulate the process
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">dW</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="p">))</span>
+    <span class="n">J</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">poisson</span><span class="p">(</span><span class="n">lambda_</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">rand</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">:</span>
+            <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">exponential</span><span class="p">(</span><span class="n">eta1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">J</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">exponential</span><span class="p">(</span><span class="n">eta2</span><span class="p">)</span>
+    <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">mu</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">dW</span> <span class="o">+</span> <span class="n">J</span><span class="p">)</span>
+
+<span class="c1"># Plot the simulated process
+</span><span class="n">plt</span><span class="p">.</span><span class="nf">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="s">'Kou Jump-Diffusion Model Simulation'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="s">'Time'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="s">'Stock Price'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">grid</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="c1"># Display the plot
+</span><span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div>
+<p>This Python code generates the plot above, illustrating a simulated, jumpy asset price.</p>
+
+<blockquote>
+  <p>The Kou model is a powerful tool for financial modeling, offering both accuracy and practicality in option pricing.</p>
+</blockquote>
+
+<p>The Kou model is better than the Black-Scholes model for matching historical stock prices. It’s also easier to use than other jump process models when pricing options. This is because the Kou model uses the exponential distribution, which has a special property called “memorylessness.” This property allows for explicit formulas for option prices, which makes calculations simpler and more efficient.</p>
+
+<p>The Black-Scholes model assumes stock prices follow a continuous path without sudden jumps, which often doesn’t match real market behavior. In contrast, the Kou model incorporates sudden jumps in stock prices, providing a more accurate representation of actual market data. Additionally, the Kou model allows for simpler mathematical formulas to price options, making it more practical for traders and analysts. Due to the “memorylessness” of the exponential distribution, the Kou model can derive clear, straightforward formulas for pricing various options, unlike other complex jump models.</p>
+
+<p>The exponential distribution has the property that the probability of an event occurring in the future is independent of the past, which allows the Kou model to handle jumps in stock prices more easily and leads to explicit pricing formulas. This provides a more realistic model of stock price movements.</p>
+
+</div>
+
+        
+        <div class="categories">
+        
+
+
+  
+    
+
+
+
+
+<div class="category-link">
+<a href="/category/mathnote">
+  Mathnote
+</a>
+
+</div>
+  
+    
+
+
+
+
+<div class="category-link">
+<a href="/category/technote">
+  Technote
+</a>
+
+</div>
+  
+
+        
+        </div>
+
+        
+
+    
+
+    
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <div class="section section-base-bg-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-12"></div>
+        <div class="subscribe">
+  <div class="row">
+    <div class="col-12 col-md-4 mb-2 mb-md-0">
+      <h2 class="">Let's keep in touch</h2>
+    </div>
+
+    <div class="co-12 col-md-8">
+      <div id="mc_embed_signup">
+        <form action="https://zerostatic.us21.list-manage.com/subscribe/post?u=798e19886b83aaab346734382&amp;id=f1c526a772&amp;f_id=0027e3e6f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="subscribe-form" target="_blank" novalidate>
+          <div class="subscribe-fields">
+            <input class="required email" id="mce-EMAIL" name="EMAIL" placeholder="Your email address" type="email" value="" />
+            <div aria-hidden="true" style="position: absolute; left: -5000px"><input name="b_675276692aebec1c007f8156d_3e3da720c2" tabindex="-1" type="text" value="" /></div>
+            <input type="submit" value="Submit" />
+          </div>
+          <div class="subscribe-responses" id="mce-responses">
+            <div class="response response-error" id="mce-error-response" style="display: none"></div>
+            <div class="response response-success" id="mce-success-response" style="display: none"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+  <div class="footer">
+  <div class="container">
+    <div class="row">
+
+        <div class="col-12 col-md-4">
+          <div class="footer-info">
+            
+              <h2>Nippotica Corporation</h2>
+            
+
+            
+              <p>Developing Deeptech Solutions</p>
+            
+          </div>
+
+          
+          
+        </div>
+
+        <div class="col-12 col-md-8 mt-gutter mt-md-0">
+          <div class="row justify-content-end">
+
+            
+
+            
+              <div class="col-12 col-md-3 mt-gutter mt-md-0">
+                <div class="footer-menu">
+                
+                  <h3>Notices</h3>
+                
+                
+<div class="menu-footer">
+  <ul>
+    
+      <li class="">
+        <a href="/privacyjp/">プライバシー</a>
+      </li>
+    
+      <li class="">
+        <a href="/contactjp/">お問い合わせ</a>
+      </li>
+    
+  </ul>
+</div>
+
+                </div>
+              </div>
+            
+
+            
+        
+          </div>
+        </div>
+      
+    </div>
+    
+
+  </div>
+</div>
+
+
+
+<script type="text/javascript" src="/assets/js/scripts.js"></script>
+
+<script type="text/javascript" src="/assets/js/hamburger.js"></script>
+<script type="text/javascript" src="/assets/js/darkModeSwitch.js"></script>
+
+<script type="text/javascript" src="/assets/js/scripts.js"></script>
+
+<script type="text/javascript" src="/assets/js/hamburger.js"></script>
+<script type="text/javascript" src="/assets/js/darkModeSwitch.js"></script>
+
+<!-- Load Map Script -->
+<script src="/assets/js/map.js"></script>
+
+
+
+
+</body>
+</html>

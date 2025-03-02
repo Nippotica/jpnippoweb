@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+  </script>
+  <script type="text/javascript" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <!-- Leaflet.js -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+</head>
+
+  <head>
+    <meta charset="utf-8">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <title>Daijiro Nishi - Nippotica</title>
+
+
+  <meta name="description" content="Chief Executive Officer"/>
+
+
+
+    <meta property="og:type" content="website"/>
+<meta property="og:url" content="http://localhost:4000/nipponishi/"/>
+
+
+  <meta property="og:title" content="Daijiro Nishi"/>
+
+
+
+  <meta property="og:description" content="Chief Executive Officer"/>
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="@zerostaticio" />
+<meta name="twitter:creator" content="@zerostaticio" />
+    <link rel="alternate" type="application/atom+xml" title="Nippotica" href="/feed.xml">
+    <link rel="icon" href="/assets/images/favicon/favicon.png">
+
+
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+      <!-- https://github.com/orestbida/cookieconsent -->
+
+<link rel="stylesheet" href="/assets/css/cookieconsent.css">
+<script defer src="/assets/js/cookieconsent.js"></script>
+
+<!-- Inline script -->
+<script>
+    window.addEventListener('load', function () {
+
+        // obtain plugin
+        var cc = initCookieConsent();
+
+        // run plugin with your configuration
+        cc.run({
+            current_lang: 'en',
+            autoclear_cookies: true,                   // default: false
+            page_scripts: true,                        // default: false
+
+            // mode: 'opt-in'                          // default: 'opt-in'; value: 'opt-in' or 'opt-out'
+            // delay: 0,                               // default: 0
+            // auto_language: '',                      // default: null; could also be 'browser' or 'document'
+            // autorun: true,                          // default: true
+            // force_consent: false,                   // default: false
+            // hide_from_bots: true,                   // default: true
+            // remove_cookie_tables: false             // default: false
+            // cookie_name: 'cc_cookie',               // default: 'cc_cookie'
+            // cookie_expiration: 182,                 // default: 182 (days)
+            // cookie_necessary_only_expiration: 182   // default: disabled
+            // cookie_domain: location.hostname,       // default: current domain
+            // cookie_path: '/',                       // default: root
+            // cookie_same_site: 'Lax',                // default: 'Lax'
+            // use_rfc_cookie: false,                  // default: false
+            // revision: 0,                            // default: 0
+
+            onFirstAction: function (user_preferences, cookie) {
+                // callback triggered only once on the first accept/reject action
+            },
+
+            onAccept: function (cookie) {
+                // callback triggered on the first accept/reject action, and after each page load
+            },
+
+            onChange: function (cookie, changed_preferences) { 
+                // If analytics category is disabled => disable google analytics 
+                if (!cc.allowedCategory('analytics')) { 
+                    typeof gtag === 'function' && gtag('consent', 'update', { 
+                        'analytics_storage': 'denied' 
+                    }); 
+                } 
+            }, 
+
+            languages: {
+                'en': {
+                    consent_modal: {
+                        title: 'We use cookies!',
+                        description: 'Hi, this website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent. <button type="button" data-cc="c-settings" class="cc-link">Let me choose</button>',
+                        primary_btn: {
+                            text: 'Accept all',
+                            role: 'accept_all'              // 'accept_selected' or 'accept_all'
+                        },
+                        secondary_btn: {
+                            text: 'Reject all',
+                            role: 'accept_necessary'        // 'settings' or 'accept_necessary'
+                        }
+                    },
+                    settings_modal: {
+                        title: 'Cookie preferences',
+                        save_settings_btn: 'Save settings',
+                        accept_all_btn: 'Accept all',
+                        reject_all_btn: 'Reject all',
+                        close_btn_label: 'Close',
+                        // cookie_table_caption: 'Cookie list',
+                        cookie_table_headers: [
+                            { col1: 'Name' },
+                            { col2: 'Domain' },
+                            { col3: 'Expiration' },
+                            { col4: 'Description' }
+                        ],
+                        blocks: [
+                            {
+                                title: 'Cookie usage 📢',
+                                description: 'I use cookies to ensure the basic functionalities of the website and to enhance your online experience. You can choose for each category to opt-in/out whenever you want. For more details relative to cookies and other sensitive data, please read the full <a href="#" class="cc-link">privacy policy</a>.'
+                            }, {
+                                title: 'Strictly necessary cookies',
+                                description: 'These cookies are essential for the proper functioning of my website. Without these cookies, the website would not work properly',
+                                toggle: {
+                                    value: 'necessary',
+                                    enabled: true,
+                                    readonly: true          // cookie categories with readonly=true are all treated as "necessary cookies"
+                                }
+                            }, {
+                                title: 'Performance and Analytics cookies',
+                                description: 'These cookies allow the website to remember the choices you have made in the past',
+                                toggle: {
+                                    value: 'analytics',     // your cookie category
+                                    enabled: false,
+                                    readonly: false
+                                },
+                                cookie_table: [             // list of all expected cookies
+                                    {
+                                        col1: '^_ga',       // match all cookies starting with "_ga"
+                                        col2: 'google.com',
+                                        col3: '2 years',
+                                        col4: 'description ...',
+                                        is_regex: true
+                                    },
+                                    {
+                                        col1: '_gid',
+                                        col2: 'google.com',
+                                        col3: '1 day',
+                                        col4: 'description ...',
+                                    }
+                                ]
+                            },
+                            {
+                                title: 'More information',
+                                description: 'For any queries in relation to our policy on cookies and your choices, please <a class="cc-link" href="#yourcontactpage">contact us</a>.',
+                            }
+                        ]
+                    }
+                }
+            }
+        });
+    });
+</script>
+    
+
+    
+
+    <link href="/assets/css/fonts.css" rel="stylesheet">
+
+
+
+
+    
+
+     <!-- MathJax Configuration and Script -->
+    <script type="text/x-mathjax-config">
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true,
+          tags: 'ams', // Automatically number all displayed equations using the AMS style
+          tagSide: 'right', // Position of the equation numbers
+          tagIndent: '0.8em' // Indentation of the numbers
+        },
+        options: {
+          ignoreHtmlClass: "tex2jax_ignore",
+          processHtmlClass: "tex2jax_process"
+        }
+      };
+    </script>
+    <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+  </head>
+
+<body class="page page-project has-static-header">
+
+
+<div class="menu-main-mobile " id="menu-main-mobile">
+  
+  <div class="menu-main-mobile-top">
+    <div id="close-overlay" class="menu-main-close">
+      <div class="hamburger"></div>
+    </div>
+  </div>
+
+  <div class="menu-main-mobile-center">
+    
+      <ul class="menu">
+        
+          <li class="menu-item-会社概要">
+            <a href="/">会社概要</a>
+          </li>
+        
+          <li class="menu-item-テクノロジー">
+            <a href="/techjp/">テクノロジー</a>
+          </li>
+        
+          <li class="menu-item-ビジネスユニット">
+            <a href="/bizunitsjp/">ビジネスユニット</a>
+          </li>
+        
+          <li class="menu-item-インサイト">
+            <a href="/insights/">インサイト</a>
+          </li>
+        
+          <li class="menu-item-🇺🇸">
+            <a href="/welcome/">🇺🇸</a>
+          </li>
+        
+      </ul>
+    
+  </div>
+
+  <div class="menu-main-mobile-bottom">
+    
+      
+
+<div class="social" id="social">
+  
+  <a href="https://www.zerostatic.io" target="blank" title="Twitter">
+    <i class="fab fa-twitter"></i>
+  </a>
+  
+  <a href="https://www.zerostatic.io" target="blank" title="Github">
+    <i class="fab fa-github"></i>
+  </a>
+  
+  <a href="https://www.zerostatic.io" target="blank" title="Discord">
+    <i class="fab fa-discord"></i>
+  </a>
+  
+</div>
+
+
+    
+    
+  </div>
+
+</div>
+
+
+
+
+<div id="header" class='header '>
+  <div class="container">
+    <div class="logos">
+  <div class="logo logo-desktop">
+    
+      <div class="logo-image">
+        <a href="/">
+          <img height="27px" width="146px" alt="Nippotica Logo" src="/assets/images/logo/logo.png"/>
+        </a>
+      </div>
+    
+  
+    
+    
+  </div>
+
+  <div class="logo logo-desktop-invert">
+    
+    
+      <div class="logo-image">
+        <a href="/">
+          <img height="27px" width="146px" alt="Nippotica Logo" src="/assets/images/logo/logo-invert.png"/>
+        </a>
+      </div>
+    
+  
+    
+    
+  </div>
+
+  <div class="logo logo-mobile">
+    
+    
+      <div class="logo-image">
+        <a href="/">
+          <img height="27px" width="146px" alt="Nippotica Logo" src="/assets/images/logo/logo-mobile.png"/>
+        </a>
+      </div>
+    
+  
+    
+    
+  </div>
+
+
+  <div class="logo logo-mobile-invert">
+    
+    
+      <div class="logo-image">
+        <a href="/">
+          <img height="27px" width="146px" alt="Nippotica Logo" src="/assets/images/logo/logo-invert-mobile.png"/>
+        </a>
+      </div>
+    
+  
+    
+
+  </div>
+
+</div>
+
+
+    <div class="menu-main">
+  <ul>
+    
+      
+
+        
+        
+
+        <li class="menu-item-dropdown menu-item-会社概要 ">
+          <a href="/">会社概要 <i class="fa-solid fa-chevron-down"></i></a>
+          
+          <div class="dropdown-menu">
+            
+<a href="/aboutjp/"
+   class="dropdown-item "
+   
+   >
+   について
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/peoplejp/"
+   class="dropdown-item "
+   
+   >
+   メンバー
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+          </div>
+
+        </li>
+      
+    
+      
+        
+        <li class=" ">
+<a href="/techjp/"  >テクノロジー</a>
+        </li>
+      
+    
+      
+
+        
+        
+
+        <li class="menu-item-dropdown menu-item-ビジネスユニット ">
+          <a href="/bizunitsjp/">ビジネスユニット <i class="fa-solid fa-chevron-down"></i></a>
+          
+          <div class="dropdown-menu">
+            
+<a href="https://www.nippofin.com/"
+   class="dropdown-item "
+   target="_blank"
+   rel="noopener noreferrer">
+   Nippofin
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="https://www.algotechniq.com/"
+   class="dropdown-item "
+   target="_blank"
+   rel="noopener noreferrer">
+   Algotechniq
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+          </div>
+
+        </li>
+      
+    
+      
+
+        
+        
+
+        <li class="menu-item-dropdown menu-item-インサイト ">
+          <a href="/insights/">インサイト <i class="fa-solid fa-chevron-down"></i></a>
+          
+          <div class="dropdown-menu">
+            
+<a href="https://www.nippofin.com/blog/"
+   class="dropdown-item "
+   target="_blank"
+   rel="noopener noreferrer">
+   Fintech
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="https://www.algotechniq.com/blog/"
+   class="dropdown-item "
+   target="_blank"
+   rel="noopener noreferrer">
+   IIoT
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+          </div>
+
+        </li>
+      
+    
+      
+
+        
+        
+
+        <li class="menu-item-dropdown menu-item-🇺🇸 ">
+          <a href="/welcome/">🇺🇸 <i class="fa-solid fa-chevron-down"></i></a>
+          
+          <div class="dropdown-menu">
+            
+<a href="/about/"
+   class="dropdown-item "
+   
+   >
+   About
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/people/"
+   class="dropdown-item "
+   
+   >
+   Team
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/tech/"
+   class="dropdown-item "
+   
+   >
+   Tech
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/contact/"
+   class="dropdown-item "
+   
+   >
+   Contact
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/privacy-policy/"
+   class="dropdown-item "
+   
+   >
+   Privacy
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+          </div>
+
+        </li>
+      
+    
+  </ul>
+</div>
+
+    
+    <div class="hamburger-trigger" id="toggle-menu-main-mobile">
+  <button class="hamburger">Menu</button>
+</div>
+  </div>
+</div>
+
+<div id="wrapper" class="wrapper">     
+  
+
+<div class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+
+      <div class="col-12 col-md-6">
+
+        
+          <div class="project-heading">
+            <h1>Daijiro Nishi</h1>
+          </div>
+        
+
+        
+
+        <div class="content"><p><strong>Chief Executive Officer</strong></p>
+
+<p>Daijiro’s career began at JPMorgan, where he worked in derivatives trading from 1994 to 2000. He has now transitioned from a career as a trader to becoming a venture entrepreneur.</p>
+
+<p>Daijiro is one of Japan’s leading experts in interest rate derivatives trading and has played a key role in modernizing financial operations within domestic institutions by leveraging his international banking experience.</p>
+
+<p>Before co-founding Nippotica, Daijiro served as Deputy Head of External Relations for the University of Tokyo Endowment Fund. From 2018 to 2022, he was Head of Derivatives Markets at SMBC Nikko Securities. Prior to that, he worked at Société Générale from 2009 to 2016 and Deutsche Securities from 2000 to 2009, specializing in derivatives and government bond trading.</p>
+
+<p>He holds a Master’s degree in Business Administration from Keio University and a Bachelor’s degree in Economics from the University of Tokyo.</p>
+</div>
+
+        
+
+      </div>
+
+      <div class="col-12 col-md-6 mt-6 mt-md-0">
+        <div class="gallery gallery-single-column">
+          
+            <div class="gallery-item">
+              <div class="gallery-image"><img src="/assets/images/team/nishi.jpeg"/></div>
+              <div class="gallery-caption"><strong>CEO:</strong> Daijiro Nishi</div>
+            </div>
+          
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <div class="footer">
+  <div class="container">
+    <div class="row">
+
+        <div class="col-12 col-md-4">
+          <div class="footer-info">
+            
+              <h2>Nippotica Corporation</h2>
+            
+
+            
+              <p>Developing Deeptech Solutions</p>
+            
+          </div>
+
+          
+          
+        </div>
+
+        <div class="col-12 col-md-8 mt-gutter mt-md-0">
+          <div class="row justify-content-end">
+
+            
+
+            
+              <div class="col-12 col-md-3 mt-gutter mt-md-0">
+                <div class="footer-menu">
+                
+                  <h3>Notices</h3>
+                
+                
+<div class="menu-footer">
+  <ul>
+    
+      <li class="">
+        <a href="/privacyjp/">プライバシー</a>
+      </li>
+    
+      <li class="">
+        <a href="/contactjp/">お問い合わせ</a>
+      </li>
+    
+  </ul>
+</div>
+
+                </div>
+              </div>
+            
+
+            
+        
+          </div>
+        </div>
+      
+    </div>
+    
+
+  </div>
+</div>
+
+
+
+<script type="text/javascript" src="/assets/js/scripts.js"></script>
+
+<script type="text/javascript" src="/assets/js/hamburger.js"></script>
+<script type="text/javascript" src="/assets/js/darkModeSwitch.js"></script>
+
+<script type="text/javascript" src="/assets/js/scripts.js"></script>
+
+<script type="text/javascript" src="/assets/js/hamburger.js"></script>
+<script type="text/javascript" src="/assets/js/darkModeSwitch.js"></script>
+
+<!-- Load Map Script -->
+<script src="/assets/js/map.js"></script>
+
+
+
+
+</body>
+</html>

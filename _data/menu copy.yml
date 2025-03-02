@@ -1,0 +1,55 @@
+main:
+  - name: Home
+    url: /
+    weight: 1
+  - name: About
+    url: /about/
+    weight: 2
+  - name: Nippofin
+    url: https://www.nippofin.com/
+    target: _blank
+    rel: noopener noreferrer
+    weight: 3
+  - name: Algotechniq
+    url: https://www.algotechniq.com/
+    target: _blank
+    rel: noopener noreferrer
+    weight: 4
+  - name: Workflow
+    url: /workflow/
+    weight: 5
+  - name: People
+    url: /people/
+    weight: 5
+  - name: 日本語
+    url: /aboutjp/
+    weight: 6
+  
+
+footer_primary:
+  - name: "Financial Engineering"
+    url: /projects/project-2/
+  - name: "Computing on Clouds"
+    url: /projects/project-1/
+  - name: "System Development"
+    url: /projects/project-3/
+  - name: "Data Quality Management"
+    url: /projects/project-4/
+
+footer_secondary:
+  - name: Privacy Policy
+    url: /privacy-policy/
+    weight: 1
+  - name: Contact
+    url: /contact/
+    weight: 4
+
+footer_tertiary:
+  - name: Privacy Policy
+    url: /privacy-policy/
+    weight: 1
+
+bottom:
+  - name: Privacy Policy
+    url: /privacy-policy/
+    weight: 3

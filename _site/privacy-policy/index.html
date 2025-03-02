@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+  </script>
+  <script type="text/javascript" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <!-- Leaflet.js -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+</head>
+
+  <head>
+    <meta charset="utf-8">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <title>Privacy Policy - Nippotica</title>
+
+
+
+
+    <meta property="og:type" content="website"/>
+<meta property="og:url" content="http://localhost:4000/privacy-policy/"/>
+
+
+  <meta property="og:title" content="Privacy Policy"/>
+
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="@zerostaticio" />
+<meta name="twitter:creator" content="@zerostaticio" />
+    <link rel="alternate" type="application/atom+xml" title="Nippotica" href="/feed.xml">
+    <link rel="icon" href="/assets/images/favicon/favicon.png">
+
+
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+      <!-- https://github.com/orestbida/cookieconsent -->
+
+<link rel="stylesheet" href="/assets/css/cookieconsent.css">
+<script defer src="/assets/js/cookieconsent.js"></script>
+
+<!-- Inline script -->
+<script>
+    window.addEventListener('load', function () {
+
+        // obtain plugin
+        var cc = initCookieConsent();
+
+        // run plugin with your configuration
+        cc.run({
+            current_lang: 'en',
+            autoclear_cookies: true,                   // default: false
+            page_scripts: true,                        // default: false
+
+            // mode: 'opt-in'                          // default: 'opt-in'; value: 'opt-in' or 'opt-out'
+            // delay: 0,                               // default: 0
+            // auto_language: '',                      // default: null; could also be 'browser' or 'document'
+            // autorun: true,                          // default: true
+            // force_consent: false,                   // default: false
+            // hide_from_bots: true,                   // default: true
+            // remove_cookie_tables: false             // default: false
+            // cookie_name: 'cc_cookie',               // default: 'cc_cookie'
+            // cookie_expiration: 182,                 // default: 182 (days)
+            // cookie_necessary_only_expiration: 182   // default: disabled
+            // cookie_domain: location.hostname,       // default: current domain
+            // cookie_path: '/',                       // default: root
+            // cookie_same_site: 'Lax',                // default: 'Lax'
+            // use_rfc_cookie: false,                  // default: false
+            // revision: 0,                            // default: 0
+
+            onFirstAction: function (user_preferences, cookie) {
+                // callback triggered only once on the first accept/reject action
+            },
+
+            onAccept: function (cookie) {
+                // callback triggered on the first accept/reject action, and after each page load
+            },
+
+            onChange: function (cookie, changed_preferences) { 
+                // If analytics category is disabled => disable google analytics 
+                if (!cc.allowedCategory('analytics')) { 
+                    typeof gtag === 'function' && gtag('consent', 'update', { 
+                        'analytics_storage': 'denied' 
+                    }); 
+                } 
+            }, 
+
+            languages: {
+                'en': {
+                    consent_modal: {
+                        title: 'We use cookies!',
+                        description: 'Hi, this website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent. <button type="button" data-cc="c-settings" class="cc-link">Let me choose</button>',
+                        primary_btn: {
+                            text: 'Accept all',
+                            role: 'accept_all'              // 'accept_selected' or 'accept_all'
+                        },
+                        secondary_btn: {
+                            text: 'Reject all',
+                            role: 'accept_necessary'        // 'settings' or 'accept_necessary'
+                        }
+                    },
+                    settings_modal: {
+                        title: 'Cookie preferences',
+                        save_settings_btn: 'Save settings',
+                        accept_all_btn: 'Accept all',
+                        reject_all_btn: 'Reject all',
+                        close_btn_label: 'Close',
+                        // cookie_table_caption: 'Cookie list',
+                        cookie_table_headers: [
+                            { col1: 'Name' },
+                            { col2: 'Domain' },
+                            { col3: 'Expiration' },
+                            { col4: 'Description' }
+                        ],
+                        blocks: [
+                            {
+                                title: 'Cookie usage 📢',
+                                description: 'I use cookies to ensure the basic functionalities of the website and to enhance your online experience. You can choose for each category to opt-in/out whenever you want. For more details relative to cookies and other sensitive data, please read the full <a href="#" class="cc-link">privacy policy</a>.'
+                            }, {
+                                title: 'Strictly necessary cookies',
+                                description: 'These cookies are essential for the proper functioning of my website. Without these cookies, the website would not work properly',
+                                toggle: {
+                                    value: 'necessary',
+                                    enabled: true,
+                                    readonly: true          // cookie categories with readonly=true are all treated as "necessary cookies"
+                                }
+                            }, {
+                                title: 'Performance and Analytics cookies',
+                                description: 'These cookies allow the website to remember the choices you have made in the past',
+                                toggle: {
+                                    value: 'analytics',     // your cookie category
+                                    enabled: false,
+                                    readonly: false
+                                },
+                                cookie_table: [             // list of all expected cookies
+                                    {
+                                        col1: '^_ga',       // match all cookies starting with "_ga"
+                                        col2: 'google.com',
+                                        col3: '2 years',
+                                        col4: 'description ...',
+                                        is_regex: true
+                                    },
+                                    {
+                                        col1: '_gid',
+                                        col2: 'google.com',
+                                        col3: '1 day',
+                                        col4: 'description ...',
+                                    }
+                                ]
+                            },
+                            {
+                                title: 'More information',
+                                description: 'For any queries in relation to our policy on cookies and your choices, please <a class="cc-link" href="#yourcontactpage">contact us</a>.',
+                            }
+                        ]
+                    }
+                }
+            }
+        });
+    });
+</script>
+    
+
+    
+
+    <link href="/assets/css/fonts.css" rel="stylesheet">
+
+
+
+
+    
+
+     <!-- MathJax Configuration and Script -->
+    <script type="text/x-mathjax-config">
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true,
+          tags: 'ams', // Automatically number all displayed equations using the AMS style
+          tagSide: 'right', // Position of the equation numbers
+          tagIndent: '0.8em' // Indentation of the numbers
+        },
+        options: {
+          ignoreHtmlClass: "tex2jax_ignore",
+          processHtmlClass: "tex2jax_process"
+        }
+      };
+    </script>
+    <script type="text/javascript" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+
+  </head>
+
+<body class="page page-basic has-static-header">
+
+
+<div class="menu-main-mobile " id="menu-main-mobile">
+  
+  <div class="menu-main-mobile-top">
+    <div id="close-overlay" class="menu-main-close">
+      <div class="hamburger"></div>
+    </div>
+  </div>
+
+  <div class="menu-main-mobile-center">
+    
+      <ul class="menu">
+        
+          <li class="menu-item-会社概要">
+            <a href="/">会社概要</a>
+          </li>
+        
+          <li class="menu-item-テクノロジー">
+            <a href="/techjp/">テクノロジー</a>
+          </li>
+        
+          <li class="menu-item-ビジネスユニット">
+            <a href="/bizunitsjp/">ビジネスユニット</a>
+          </li>
+        
+          <li class="menu-item-インサイト">
+            <a href="/insights/">インサイト</a>
+          </li>
+        
+          <li class="menu-item-🇺🇸">
+            <a href="/welcome/">🇺🇸</a>
+          </li>
+        
+      </ul>
+    
+  </div>
+
+  <div class="menu-main-mobile-bottom">
+    
+      
+
+<div class="social" id="social">
+  
+  <a href="https://www.zerostatic.io" target="blank" title="Twitter">
+    <i class="fab fa-twitter"></i>
+  </a>
+  
+  <a href="https://www.zerostatic.io" target="blank" title="Github">
+    <i class="fab fa-github"></i>
+  </a>
+  
+  <a href="https://www.zerostatic.io" target="blank" title="Discord">
+    <i class="fab fa-discord"></i>
+  </a>
+  
+</div>
+
+
+    
+    
+  </div>
+
+</div>
+
+
+
+
+<div id="header" class='header '>
+  <div class="container">
+    <div class="logos">
+  <div class="logo logo-desktop">
+    
+      <div class="logo-image">
+        <a href="/">
+          <img height="27px" width="146px" alt="Nippotica Logo" src="/assets/images/logo/logo.png"/>
+        </a>
+      </div>
+    
+  
+    
+    
+  </div>
+
+  <div class="logo logo-desktop-invert">
+    
+    
+      <div class="logo-image">
+        <a href="/">
+          <img height="27px" width="146px" alt="Nippotica Logo" src="/assets/images/logo/logo-invert.png"/>
+        </a>
+      </div>
+    
+  
+    
+    
+  </div>
+
+  <div class="logo logo-mobile">
+    
+    
+      <div class="logo-image">
+        <a href="/">
+          <img height="27px" width="146px" alt="Nippotica Logo" src="/assets/images/logo/logo-mobile.png"/>
+        </a>
+      </div>
+    
+  
+    
+    
+  </div>
+
+
+  <div class="logo logo-mobile-invert">
+    
+    
+      <div class="logo-image">
+        <a href="/">
+          <img height="27px" width="146px" alt="Nippotica Logo" src="/assets/images/logo/logo-invert-mobile.png"/>
+        </a>
+      </div>
+    
+  
+    
+
+  </div>
+
+</div>
+
+
+    <div class="menu-main">
+  <ul>
+    
+      
+
+        
+        
+
+        <li class="menu-item-dropdown menu-item-会社概要 ">
+          <a href="/">会社概要 <i class="fa-solid fa-chevron-down"></i></a>
+          
+          <div class="dropdown-menu">
+            
+<a href="/aboutjp/"
+   class="dropdown-item "
+   
+   >
+   について
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/peoplejp/"
+   class="dropdown-item "
+   
+   >
+   メンバー
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+          </div>
+
+        </li>
+      
+    
+      
+        
+        <li class=" ">
+<a href="/techjp/"  >テクノロジー</a>
+        </li>
+      
+    
+      
+
+        
+        
+
+        <li class="menu-item-dropdown menu-item-ビジネスユニット ">
+          <a href="/bizunitsjp/">ビジネスユニット <i class="fa-solid fa-chevron-down"></i></a>
+          
+          <div class="dropdown-menu">
+            
+<a href="https://www.nippofin.com/"
+   class="dropdown-item "
+   target="_blank"
+   rel="noopener noreferrer">
+   Nippofin
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="https://www.algotechniq.com/"
+   class="dropdown-item "
+   target="_blank"
+   rel="noopener noreferrer">
+   Algotechniq
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+          </div>
+
+        </li>
+      
+    
+      
+
+        
+        
+
+        <li class="menu-item-dropdown menu-item-インサイト ">
+          <a href="/insights/">インサイト <i class="fa-solid fa-chevron-down"></i></a>
+          
+          <div class="dropdown-menu">
+            
+<a href="https://www.nippofin.com/blog/"
+   class="dropdown-item "
+   target="_blank"
+   rel="noopener noreferrer">
+   Fintech
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="https://www.algotechniq.com/blog/"
+   class="dropdown-item "
+   target="_blank"
+   rel="noopener noreferrer">
+   IIoT
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+          </div>
+
+        </li>
+      
+    
+      
+
+        
+        
+
+        <li class="menu-item-dropdown menu-item-🇺🇸  active ">
+          <a href="/welcome/">🇺🇸 <i class="fa-solid fa-chevron-down"></i></a>
+          
+          <div class="dropdown-menu">
+            
+<a href="/about/"
+   class="dropdown-item "
+   
+   >
+   About
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/people/"
+   class="dropdown-item "
+   
+   >
+   Team
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/tech/"
+   class="dropdown-item "
+   
+   >
+   Tech
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/contact/"
+   class="dropdown-item "
+   
+   >
+   Contact
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+<a href="/privacy-policy/"
+   class="dropdown-item  active "
+   
+   >
+   Privacy
+</a>
+                
+                
+
+                <div class="dropdown-item-content">
+
+                  
+                </div>
+              </a>
+            
+          </div>
+
+        </li>
+      
+    
+  </ul>
+</div>
+
+    
+    <div class="hamburger-trigger" id="toggle-menu-main-mobile">
+  <button class="hamburger">Menu</button>
+</div>
+  </div>
+</div>
+
+<div id="wrapper" class="wrapper">     
+  <div class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10">
+        
+
+
+
+
+
+
+
+
+
+<div class="heading heading-left">
+  
+  
+  
+  <div class="heading-heading">
+    <h1>Privacy Policy</h1>
+  </div>
+  
+  
+  
+
+  
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  <div class="section pt-0">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+          <div class="content"><p>Nippotica (“we,” “our,” or “us”) is committed to protecting your privacy. This Privacy Policy outlines our practices regarding the collection, use, and disclosure of information we receive when you visit our website and use our services. By accessing or using our website, you agree to the terms of this Privacy Policy.</p><h3 id="information-we-collect">Information We Collect</h3><p>We collect various types of information to provide and improve our services to you:</p><h4 id="personal-information">Personal Information</h4><ul>  <li><strong>Contact Information:</strong> We may collect your name, email address, phone number, and mailing address when you fill out forms on our website.</li>  <li><strong>Account Information:</strong> If you create an account, we collect your username, password, and other registration details.</li></ul><h4 id="usage-data">Usage Data</h4><ul>  <li><strong>Log Data:</strong> We collect information that your browser sends whenever you visit our website. This may include your IP address, browser type, browser version, pages of our site that you visit, the time and date of your visit, the time spent on those pages, and other statistics.</li>  <li><strong>Cookies:</strong> We use cookies to collect information and improve our services. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.</li></ul><h4 id="third-party-data">Third-Party Data</h4><ul>  <li>We may receive information about you from third parties, such as public databases, social media platforms, and our business partners.</li></ul><h3 id="how-we-use-your-information">How We Use Your Information</h3><p>We use the information we collect for various purposes, including:</p><ul>  <li>Providing, maintaining, and improving our services.</li>  <li>Communicating with you, including responding to your inquiries and providing customer support.</li>  <li>Personalizing your experience on our website.</li>  <li>Sending you promotional materials, newsletters, and other marketing communications.</li>  <li>Monitoring and analyzing usage and trends to improve our website and services.</li>  <li>Detecting, preventing, and addressing technical issues.</li></ul><h3 id="sharing-your-information">Sharing Your Information</h3><p>We do not sell or rent your personal information to third parties. We may share your information in the following circumstances:</p><ul>  <li><strong>Service Providers:</strong> We may share your information with third-party service providers who perform services on our behalf, such as payment processing, data analysis, email delivery, and hosting services.</li>  <li><strong>Legal Requirements:</strong> We may disclose your information if required to do so by law or in response to valid requests by public authorities (e.g., a court or government agency).</li>  <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale of all or a portion of our assets, your information may be transferred as part of the transaction.</li></ul><h3 id="gdpr-compliance">GDPR Compliance</h3><p>If you are a resident of the European Economic Area (EEA), you have certain data protection rights under the General Data Protection Regulation (GDPR), including:</p><ul>  <li><strong>Right to Access:</strong> You have the right to request access to your personal data.</li>  <li><strong>Right to Rectification:</strong> You have the right to request that we correct any inaccuracies in your personal data.</li>  <li><strong>Right to Erasure:</strong> You have the right to request the deletion of your personal data.</li>  <li><strong>Right to Restrict Processing:</strong> You have the right to request that we restrict the processing of your personal data.</li>  <li><strong>Right to Data Portability:</strong> You have the right to receive a copy of your personal data in a structured, commonly used, and machine-readable format.</li>  <li><strong>Right to Object:</strong> You have the right to object to the processing of your personal data.</li></ul><p>To exercise these rights, please contact us using the contact information provided below. We may ask you to verify your identity before responding to such requests.</p><h3 id="data-security">Data Security</h3><p>We implement reasonable security measures to protect your information from unauthorized access, use, or disclosure. However, no method of transmission over the internet or method of electronic storage is 100% secure, and we cannot guarantee its absolute security.</p><h3 id="your-rights">Your Rights</h3><p>You have certain rights regarding your personal information, including:</p><ul>  <li>The right to access and update your information.</li>  <li>The right to request the deletion of your information.</li>  <li>The right to object to or restrict the processing of your information.</li>  <li>The right to withdraw your consent at any time, where we rely on your consent to process your information.</li></ul><p>To exercise these rights, please contact us using the contact information provided below.</p><h3 id="childrens-privacy">Children’s Privacy</h3><p>Our website is not intended for use by children under the age of 13. We do not knowingly collect personal information from children under 13. If we become aware that we have collected personal information from a child under 13, we will take steps to delete such information.</p><h3 id="changes-to-this-privacy-policy">Changes to This Privacy Policy</h3><p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p><h3 id="contact-us">Contact Us</h3><p>If you have any questions about this Privacy Policy, please contact us at:</p><p>Nippotica Corporation <br />Email: info@nippotica.com <br />Address: Portal Point FD-02, Garden Place Glass Square, Shibuyaku Ebisu 4-20-4, <br />Tokyo 150-6090, Japan</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+  <div class="footer">
+  <div class="container">
+    <div class="row">
+
+        <div class="col-12 col-md-4">
+          <div class="footer-info">
+            
+              <h2>Nippotica Corporation</h2>
+            
+
+            
+              <p>Developing Deeptech Solutions</p>
+            
+          </div>
+
+          
+          
+        </div>
+
+        <div class="col-12 col-md-8 mt-gutter mt-md-0">
+          <div class="row justify-content-end">
+
+            
+
+            
+              <div class="col-12 col-md-3 mt-gutter mt-md-0">
+                <div class="footer-menu">
+                
+                  <h3>Notices</h3>
+                
+                
+<div class="menu-footer">
+  <ul>
+    
+      <li class="">
+        <a href="/privacyjp/">プライバシー</a>
+      </li>
+    
+      <li class="">
+        <a href="/contactjp/">お問い合わせ</a>
+      </li>
+    
+  </ul>
+</div>
+
+                </div>
+              </div>
+            
+
+            
+        
+          </div>
+        </div>
+      
+    </div>
+    
+
+  </div>
+</div>
+
+
+
+<script type="text/javascript" src="/assets/js/scripts.js"></script>
+
+<script type="text/javascript" src="/assets/js/hamburger.js"></script>
+<script type="text/javascript" src="/assets/js/darkModeSwitch.js"></script>
+
+<script type="text/javascript" src="/assets/js/scripts.js"></script>
+
+<script type="text/javascript" src="/assets/js/hamburger.js"></script>
+<script type="text/javascript" src="/assets/js/darkModeSwitch.js"></script>
+
+<!-- Load Map Script -->
+<script src="/assets/js/map.js"></script>
+
+
+
+
+</body>
+</html>
