@@ -4,7 +4,7 @@ title: "会社情報"
 date: 2024-11-28T15:15:34+10:00
 permalink: "/corpjp/"
 description: "Deeptechの力を世界へ"
-
+image: "/assets/images/gen/content/nippoticalandingjp.webp"
 ---
 
 
