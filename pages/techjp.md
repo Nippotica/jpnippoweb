@@ -1,6 +1,6 @@
 ---
 layout: basic
-title: "テクノロジ"
+title: "事業内容"
 permalink: "/techjp/"
 description: "Deeptechの力を世界へ"
 ---
