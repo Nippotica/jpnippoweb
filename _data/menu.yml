@@ -1,13 +1,8 @@
 main:
-  - name: 会社概要 
-    url: "#"
+  - name: について 
+    url: /aboutjp/
     weight: 2
-    child:
-      - name: "について"
-        url: /aboutjp/
-      - name: "メンバー"
-        url: /peoplejp/
-  - name: テクノロジー
+  - name: 事業内容
     url: /techjp/
     weight: 2
   - name: ビジネスユニット
@@ -22,6 +17,12 @@ main:
         url: https://www.algotechniq.com/
         target: _blank
         rel: noopener noreferrer
+  - name: 会社概要 
+    url: /corpjp/
+    weight: 2
+    child:
+      - name: "メンバー"
+        url: /peoplejp/
   - name: インサイト
     url: /insights/
     weight: 4
