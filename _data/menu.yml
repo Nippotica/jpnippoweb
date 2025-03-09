@@ -1,5 +1,5 @@
 main:
-  - name: について 
+  - name: 会社について 
     url: /aboutjp/
     weight: 2
   - name: 事業内容
@@ -20,9 +20,6 @@ main:
   - name: 会社概要 
     url: /corpjp/
     weight: 2
-    child:
-      - name: "メンバー"
-        url: /peoplejp/
   - name: インサイト
     url: /insights/
     weight: 4
