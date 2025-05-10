@@ -7,8 +7,7 @@ description: "Turning Deeptech into Real Businesses"
 
 {% include framework/shortcodes/figure.html src="/assets/images/gen/content/nippoprocess.png" title="The Nippotica Way" caption="Simple, Clear Process for Commercializing Deeptech" %}
 
-Nippotica is a deeptech venture builder that turns advanced research into real-world solutions. Each solution originates within Nippotica and is launched as an independent company once it demonstrates market traction and team readiness.
-
+Nippotica is a deeptech venture builder that turns advanced research into market-ready solutions. Each solution originates within Nippotica and is launched as an independent company once it demonstrates market traction and team readiness.
 
 # Commercializing Deeptech
 
