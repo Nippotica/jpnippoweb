@@ -40,8 +40,8 @@ main:
         url: /about/
       - name: "Team"
         url: /people/
-      - name: "Tech"
-        url: /tech/
+      - name: "Process"
+        url: /process/
       - name: "Contact"
         url: /contact/
       - name: "Privacy"
