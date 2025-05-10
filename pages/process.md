@@ -5,11 +5,11 @@ permalink: "/process/"
 description: "Turning Deeptech into Real Businesses"
 ---
 
-> What does Nippotica do, and how does it do it?
+> What we do, and how we do it
 
 {% include framework/shortcodes/figure.html src="/assets/images/gen/content/nippoprocess.png" title="The Nippotica Way" caption="Simple, Clear Process for Commercializing Deeptech" %}
 
-Nippotica develops deeptech solutions by turning advanced research into real-world deployments. New business ideas begin as internal projects, guided through team formation and early customer traction. Once key milestones are achieved, each venture is incorporated as an independent company. This structured process ensures that every solution is built on a solid foundation of technology, market fit, and operational readiness.
+Nippotica is a deeptech venture builder that turns advanced research into real-world solutions. Each solution originates within Nippotica and is launched as an independent company once it demonstrates market traction and team readiness.
 
 
 # Commercializing Deeptech
