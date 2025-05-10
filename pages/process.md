@@ -3,6 +3,7 @@ layout: basic
 title: "Process"
 permalink: "/process/"
 description: "Turning Deeptech into Real Businesses"
+image: "/assets/images/gen/content/nippoprocess.png"
 ---
 
 > What does Nippotica do, and how does it do it?
