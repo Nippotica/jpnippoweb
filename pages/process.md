@@ -8,7 +8,7 @@ image: "/assets/images/gen/content/nippoprocess.png"
 
 > What does Nippotica do, and how does it do it?
 
-Nippotica develops deeptech ventures by turning advanced research into real-world solutions. New business ideas begin as internal projects, guided through early customer validation and team formation. Once key milestones are achieved, each venture is spun out as an independent company. This structured process ensures that every startup is built on a solid foundation of technology, market fit, and operational readiness.
+Nippotica develops deeptech solutions by turning advanced research into real-world deployments. New business ideas begin as internal projects, guided through team formation and early customer traction. Once key milestones are achieved, each venture is incorporated as an independent company. This structured process ensures that every solution is built on a solid foundation of technology, market fit, and operational readiness.
 
 
 # Commercializing Deeptech
