@@ -11,7 +11,9 @@ Nippotica is a deeptech solutions developer and venture builder based in Tokyo, 
 
 We work across key industrial technology domains, including finance, industrial AI, materials science, biotech, and next-generation semiconductor applications.
 
-We turn advanced research into practical solutions for industry. By partnering with leading research institutions across Japan, Europe, North America, and Singapore, we access innovation at its source.
+> We turn advanced research into practical solutions for industry. 
+
+By partnering with leading research institutions across Japan, Europe, North America, and Singapore, we access innovation at its source.
 
 Our network includes major Japanese manufacturers and multinational corporations seeking to integrate transformative technologies into their operations. We develop tailored solutions that enhance competitiveness, efficiency, and long-term sustainability.
 
