@@ -1,13 +1,11 @@
 ---
 layout: basic
 title: "About Us"
-date: 2018-11-28T15:15:34+10:00
+date: 2024-11-28T15:15:34+10:00
 permalink: "/about/"
 description: "Decades of Tech Expertise, Working for You"
 image: "/assets/images/gen/content/welcome.webp"
 ---
-
-# Deeptech Solution Ventures
 
 Nippotica is a deeptech solutions developer and venture builder based in Tokyo, supported by an global network of industry experts.
 
