@@ -5,13 +5,10 @@ permalink: "/techjp/"
 description: "Deeptechの力を世界へ"
 ---
 
-
-
-
 {% include framework/shortcodes/figure.html src="/assets/images/gen/content/nippoprocessjp.png" title="Nippotica のビジネスプロセス" caption="Nippoticaは、ディープテック・ベンチャーを創出し、育成し、事業化へと導く事業開発スタジオです。" %}
 
 > Core Business
-> 
+
 ### 事業概要
 
 Nippotica（ニッポティカ）は、グローバルな業界専門家ネットワークに支えられた、東京拠点のディープテック・ソリューション開発企業です。事業領域は、金融テクノロジー、産業用AI、マテリアルズ・サイエンス、バイオテクノロジー、次世代半導体応用など、多岐にわたる先端産業技術分野をカバーしています。
