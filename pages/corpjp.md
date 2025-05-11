@@ -24,7 +24,7 @@ description: "Deeptechの力を世界へ"
 <table>
     <tr>
         <td>法人名</td>
-        <td>ニッポティカ株式会社 (Nippotica Corporation)</td>
+        <td>ニポティカ株式会社 (Nippotica Corporation)</td>
     </tr>
     <tr>
         <td>設立</td>
