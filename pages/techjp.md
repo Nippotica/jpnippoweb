@@ -5,7 +5,7 @@ permalink: "/techjp/"
 description: "Deeptechの力を世界へ"
 ---
 
-{% include framework/shortcodes/figure.html src="/assets/images/gen/content/nippoprocessjp.png" title="Nippotica のビジネスプロセス" caption="Nippoticaは、ディープテック・ベンチャーを創出し、育成し、事業化へと導く事業開発スタジオです。" %}
+{% include framework/shortcodes/figure.html src="/assets/images/gen/content/nippoprocessjp.png" title="Nippotica のビジネスプロセス" caption="Nippoticaは、ディープテック・ベンチャーを創出し、育成し、事業化へと導く事業開発会社です。" %}
 
 > Core Business
 
